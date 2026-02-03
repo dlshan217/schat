@@ -1,16 +1,48 @@
-# React + Vite
+# schaat  
+***a.k.a. why is this actually working?***
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A random stranger chat app built with **React + Firebase**  
+Inspired by boredom, curiosity, and *“what if this actually connects people?”*
 
-Currently, two official plugins are available:
+>  **Warning:** You might end up talking to yourself if no one else is online
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## What is this?
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**schaat** is a real-time anonymous chat app where:
 
-## Expanding the ESLint configuration
+- You click **Find Stranger**
+- You get connected to a **random human** *(hopefully)*
+- You can **chat** or  **skip**
+No signup forms.  
+No emails.  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tech Stack
+
+- **Frontend:** React  
+- **Backend:** Firebase  
+- **Auth:** Anonymous  
+- **Realtime:** Yes, instantly (lets hope) 
+
+---
+
+## How it works
+
+1. Click **Find Stranger**
+2. Firebase does its thing
+3. You get matched with someone random
+4. Start chatting
+5. Skip anytime, repeat forever
+
+---
+
+## Disclaimer
+
+This thing is built for fun, learning, and curiosity.  
+Please don’t be weird. *Be human.
+
+sneham parakkatte 
+
