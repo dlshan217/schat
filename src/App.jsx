@@ -74,26 +74,51 @@ export default function App() {
     return <Profile onBack={() => setPage("home")} />;
   }
 
-  // HOME
-  return (
-    <div className="home">
-      <h2>Home</h2>
+// HOME (DESKTOP ONLY)
+return (
+  <div className="app">
+    <div className="home-card">
+      <h2>Welcome</h2>
+      <p className="home-sub">
+        Start a new conversation or continue one
+      </p>
 
-      <button onClick={() => setPage("chat")}>
-        Stranger Chat
-      </button>
+      <div
+        className="action-card primary"
+        onClick={() => setPage("chat")}
+      >
+        <h3>Stranger Chat</h3>
+        <p>Talk to someone new</p>
+      </div>
 
-      <button onClick={() => setPage("inbox")}>
-        Inbox
-      </button>
+      <div className="action-row">
+        <div
+          className="action-card"
+          onClick={() => setPage("inbox")}
+        >
+          <h3>Inbox</h3>
+          <p>Your private chats</p>
+        </div>
 
-      <button onClick={() => setPage("profile")}>
-        Profile
-      </button>
+        <div
+          className="action-card"
+          onClick={() => setPage("profile")}
+        >
+          <h3>Profile</h3>
+          <p>Edit your identity</p>
+        </div>
+      </div>
+  
 
-      <button onClick={() => signOut(auth)}>
-        Logout
-      </button>
+      {/* MOBILE BOTTOM NAV */}
+<div className="bottom-nav">
+  <button onClick={() => setPage("chat")}>Chat</button>
+  <button onClick={() => setPage("inbox")}>Inbox</button>
+  <button onClick={() => setPage("profile")}>Profile</button>
+</div>
+
     </div>
-  );
+  </div>
+);
+
 }

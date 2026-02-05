@@ -205,3 +205,116 @@ h2 {
 }
 
 
+
+
+
+/* HOME CARD LAYOUT */
+.home-card {
+  padding: 22px;
+  text-align: center;
+}
+
+.home-sub {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+/* ACTION CARDS */
+.action-card {
+  background: #0b1220;
+  padding: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.action-card:hover {
+  background: #020617;
+}
+
+.action-card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.action-card p {
+  margin-top: 4px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* PRIMARY CARD */
+.action-card.primary {
+  margin-bottom: 14px;
+  background: #1e293b;
+}
+
+/* ROW */
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* LOGOUT */
+.logout-btn {
+  margin-top: 18px;
+  width: 100%;
+  background: transparent;
+  opacity: 0.6;
+}
+
+.logout-btn:hover {
+  opacity: 1;
+}
+
+
+
+/* MOBILE BOTTOM NAV */
+.bottom-nav {
+  display: none;
+}
+
+/* Mobile only */
+@media (max-width: 600px) {
+  .home-card {
+    padding-bottom: 70px; /* space for nav */
+  }
+
+  .action-card,
+  .action-row,
+  .logout-btn {
+    display: none; /* hide desktop home UI */
+  }
+
+  /* Bottom Nav */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(420px, 100%);
+    background: #0b1220;
+    border-top: 1px solid #020617;
+    z-index: 10;
+  }
+
+
+  .bottom-nav button {
+    flex: 1;
+    padding: 12px 0;
+    background: transparent;
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  .bottom-nav button:hover {
+    opacity: 1;
+    background: #020617;
+  }
+}
+
+

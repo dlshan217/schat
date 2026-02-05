@@ -28,6 +28,7 @@ export default function PrivateChat({ user, chatId, onBack }) {
       const userSnap = await get(ref(db, `users/${otherUid}`));
       setOtherUser(userSnap.val());
     };
+    
 
     loadProfile();
   }, [chatId, user.uid]);
@@ -92,6 +93,7 @@ export default function PrivateChat({ user, chatId, onBack }) {
         />
         <button onClick={send}>Send</button>
       </div>
+      
     </div>
   );
 }

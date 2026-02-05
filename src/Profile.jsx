@@ -56,6 +56,19 @@ export default function Profile({ onBack }) {
 
       <button onClick={saveProfile}>Save</button>
       <button onClick={onBack}>Back</button>
+      <br /><br />
+      <button
+  style={{ marginTop: 20, opacity: 0.6 }}
+  onClick={() => {
+    auth.signOut();
+    window.location.reload();
+  }}
+>
+  Logout
+</button>
+
+
     </div>
+    
   );
 }
