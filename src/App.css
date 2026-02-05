@@ -119,5 +119,89 @@ button.secondary {
 
 
 
+/* AUTH / HOME / INBOX / PROFILE SHARED */
+.auth,
+.home,
+.inbox,
+.profile,
+.private-chat {
+  width: min(420px, 95vw);
+  margin: 40px auto;
+  background: #111827;
+  padding: 20px;
+}
+
+/* HEADINGS */
+h2 {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* AUTH INPUTS */
+.auth input,
+.profile input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* AUTH LINKS */
+.auth p {
+  font-size: 12px;
+  opacity: 0.7;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* HOME BUTTON STACK */
+.home button {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* INBOX LIST */
+.inbox-item {
+  padding: 12px;
+  border-bottom: 1px solid #020617;
+  font-size: 13px;
+}
+
+.inbox-item:hover {
+  background: #020617;
+}
+
+/* PRIVATE CHAT HEADER */
+.private-chat .header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #0b1220;
+  font-size: 13px;
+}
+
+/* PROFILE IMAGE */
+.profile img {
+  display: block;
+  margin: 10px auto;
+  border-radius: 50%;
+}
+
+/* BACK BUTTONS */
+.header button,
+.inbox button,
+.profile button {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+/* SCROLLBAR (OPTIONAL POLISH) */
+.chat::-webkit-scrollbar {
+  width: 6px;
+}
+.chat::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
 
 
