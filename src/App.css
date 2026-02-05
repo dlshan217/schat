@@ -289,32 +289,44 @@ h2 {
     display: none; /* hide desktop home UI */
   }
 
-  /* Bottom Nav */
+  /* BOTTOM NAV – DEFAULT HIDDEN */
+.bottom-nav {
+  display: none;
+}
+
+/* MOBILE ONLY */
+@media (max-width: 600px) {
+
+  /* Give content breathing space */
+  .app {
+    padding-bottom: 78px; /* space for nav + gap */
+  }
+
+  /* Bottom Navigation */
   .bottom-nav {
     display: flex;
     position: fixed;
-    bottom: 0;
+    bottom: 12px; /* 👈 THIS CREATES THE GAP */
     left: 50%;
     transform: translateX(-50%);
-    width: min(420px, 100%);
-    background: #0b1220;
-    border-top: 1px solid #020617;
+    width: min(420px, 92%);
+    background: rgba(11, 18, 32, 0.9); /* lighter, not heavy */
+    backdrop-filter: blur(6px);
+    border-radius: 14px;
+    border: 1px solid #020617;
     z-index: 10;
   }
 
-
   .bottom-nav button {
     flex: 1;
-    padding: 12px 0;
+    padding: 10px 0; /* reduced height */
     background: transparent;
     font-size: 12px;
-    opacity: 0.7;
+    opacity: 0.65;
   }
 
   .bottom-nav button:hover {
     opacity: 1;
-    background: #020617;
+    background: transparent;
   }
 }
-
-
