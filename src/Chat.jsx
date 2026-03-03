@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react";
 
 import {
@@ -338,3 +339,76 @@ if (!chatSnap.exists()) {
     </div>
   );
 }
+=======
+return (
+  <div className="chat-mobile">
+
+    <div className="chat-header">
+      <span>SCHAT</span>
+      <div className="header-right">
+        <span>{onlineCount} ONLINE</span>
+        <button onClick={onExit}>EXIT</button>
+      </div>
+    </div>
+
+    {!roomId ? (
+      <div className="chat-center">
+        {!searching ? (
+          <button onClick={findStranger}>START HUNTING</button>
+        ) : (
+          <>
+            <p>SEARCHING...</p>
+            <button onClick={cancelSearch}>CANCEL</button>
+          </>
+        )}
+      </div>
+    ) : (
+      <>
+        <div className="chat-messages">
+          {messages.map((m, i) => (
+            <div
+              key={i}
+              className={`message ${m.sender === uid ? "me" : "them"}`}
+            >
+              {m.text}
+            </div>
+          ))}
+        </div>
+
+        <div className="chat-reveal">
+          {!revealRequested && (
+            <button onClick={requestReveal}>REVEAL ID</button>
+          )}
+          {revealRequested && (
+            <div className="reveal-status">WAITING APPROVAL</div>
+          )}
+          {incomingReveal && !revealRequested && (
+            <button onClick={requestReveal}>ACCEPT REVEAL</button>
+          )}
+        </div>
+
+        <div className="chat-input-bar">
+          <input
+            value={text}
+            onChange={e => setText(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && sendMessage()}
+            placeholder="TYPE MESSAGE"
+          />
+          <button onClick={sendMessage}>SEND</button>
+          <button onClick={skip}>NEXT</button>
+        </div>
+      </>
+    )}
+
+    {showPopup && (
+      <div className="popup">
+        <div className="popup-box">
+          <h2>CHAT MOVED TO INBOX</h2>
+          <button onClick={moveToInbox}>GO TO INBOX</button>
+          <button onClick={() => setShowPopup(false)}>CANCEL</button>
+        </div>
+      </div>
+    )}
+  </div>
+);
+>>>>>>> 71c2677 (Update)
