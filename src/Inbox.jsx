@@ -1,170 +1,148 @@
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { ref, onValue, get } from "firebase/database";
-=======
-import { ref, onValue, get, remove, update } from "firebase/database";
->>>>>>> 71c2677 (Update)
 import { db } from "./firebase";
 
 export default function Inbox({ user, openChat, onBack }) {
-  const [chats, setChats] = useState([]);
 
-  useEffect(() => {
+  const [chats,setChats] = useState([]);
+  const [search,setSearch] = useState("");
+  const [view,setView] = useState("list"); // list or grid
+
+  useEffect(()=>{
+
     const userChatsRef = ref(db, `userChats/${user.uid}`);
 
-    return onValue(userChatsRef, async snap => {
+    return onValue(userChatsRef, async snap=>{
+
       const data = snap.val() || {};
       const chatIds = Object.keys(data);
 
       const results = [];
 
-      for (let chatId of chatIds) {
-        const chatSnap = await get(ref(db, `privateChats/${chatId}`));
-        if (!chatSnap.exists()) continue;
+      for(let chatId of chatIds){
+
+        const chatSnap = await get(ref(db,`privateChats/${chatId}`));
+        if(!chatSnap.exists()) continue;
 
         const chat = chatSnap.val();
-        const otherUid = Object.keys(chat.users).find(
-          id => id !== user.uid
-        );
 
-        const userSnap = await get(ref(db, `users/${otherUid}`));
-        const username = userSnap.val()?.username || "Unknown";
+        const otherUid = Object
+        .keys(chat.users)
+        .find(id=>id !== user.uid);
 
-<<<<<<< HEAD
-        results.push({
-          chatId,
-          username
-        });
-      }
+        const userSnap = await get(ref(db,`users/${otherUid}`));
 
-=======
-        // LAST MESSAGE
-        let lastMessage = "No messages";
-        let timestamp = "";
-        let unread = 0;
-
-        if (chat.messages) {
-          const msgs = Object.values(chat.messages);
-          const sorted = msgs.sort((a, b) => b.ts - a.ts);
-          const latest = sorted[0];
-
-          lastMessage = latest.text;
-          timestamp = new Date(latest.ts).toLocaleString();
-
-          unread = msgs.filter(
-            m => m.sender !== user.uid && !m.readBy?.[user.uid]
-          ).length;
-        }
+        const msgSnap = await get(ref(db,`privateChats/${chatId}/messages`));
+        const messages = msgSnap.val() || {};
+        const lastMsg = Object.values(messages).pop();
 
         results.push({
           chatId,
-          username,
-          lastMessage,
-          timestamp,
-          unread
+          username: userSnap.val()?.username || "Unknown",
+          lastMessage: lastMsg?.text || "",
+          ts: lastMsg?.ts || 0
         });
+
       }
 
-      // sort by latest timestamp
-      results.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      // sort by latest message
+      results.sort((a,b)=>b.ts-a.ts);
 
->>>>>>> 71c2677 (Update)
       setChats(results);
+
     });
-  }, [user.uid]);
 
-<<<<<<< HEAD
+  },[user.uid]);
+
+
+  const filteredChats = chats.filter(c =>
+    c.username.toLowerCase().includes(search.toLowerCase())
+  );
+
+
   return (
-    <div className="inbox">
-      {/* HEADER */}
-      <div style={{ padding: "10px" }}>
-        <button onClick={onBack}>← Back</button>
-      </div>
+<div className="page">
 
-      <h2>Inbox</h2>
+  {/* TOP BAR */}
 
-      {chats.length === 0 && (
-        <p style={{ opacity: 0.6 }}>No chats yet</p>
+  <div className="topbar">
+
+    <button
+      className="btn"
+      onClick={onBack}
+    >
+      BACK
+    </button>
+
+    <div>INBOX</div>
+
+  </div>
+
+
+  {/* SEARCH + VIEW SWITCH */}
+
+  <div style={{padding:16,display:"flex",gap:10}}>
+
+    <input
+      className="input"
+      placeholder="SEARCH CHAT..."
+      value={search}
+      onChange={e=>setSearch(e.target.value)}
+    />
+
+    <button
+      className="btn"
+      onClick={()=>setView("list")}
+    >
+      LIST
+    </button>
+
+    <button
+      className="btn"
+      onClick={()=>setView("grid")}
+    >
+      GRID
+    </button>
+
+  </div>
+
+
+  {/* MAIN */}
+
+  <div className="main">
+
+    <div className={view === "list" ? "grid" : ""}>
+
+      {filteredChats.length === 0 && (
+
+        <div className="card bg-white">
+          NO CHATS FOUND
+        </div>
+
       )}
 
-      {chats.map(chat => (
+
+      {filteredChats.map(chat => (
+
         <div
           key={chat.chatId}
-          className="inbox-item"
+          className={`card bg-blue ${view==="grid"?"list-item":""}`}
           onClick={() => openChat(chat.chatId)}
-          style={{
-            padding: 12,
-            borderBottom: "1px solid #333",
-            cursor: "pointer"
-          }}
         >
-          {chat.username}
+
+          <h2>{chat.username}</h2>
+
+          <p>
+            {chat.lastMessage || "OPEN CHAT →"}
+          </p>
+
         </div>
+
       ))}
+
     </div>
-  );
-}
-=======
-  const deleteChat = async chatId => {
-    await remove(ref(db, `privateChats/${chatId}`));
-    await remove(ref(db, `userChats/${user.uid}/${chatId}`));
-  };
 
-  return (
-    <div className="app">
-      <div className="header">
-        <span>INBOX</span>
-        <button onClick={onBack}>BACK</button>
-      </div>
+  </div>
 
-      <div className="inbox-list">
-
-        {chats.length === 0 && (
-          <div className="empty-state">
-            NO CHATS YET
-          </div>
-        )}
-
-        {chats.map(chat => (
-          <div
-            key={chat.chatId}
-            className="inbox-item"
-            onClick={() => openChat(chat.chatId)}
-          >
-            <div className="inbox-top">
-              <span className="username">
-                {chat.username}
-              </span>
-
-              {chat.unread > 0 && (
-                <span className="badge">
-                  {chat.unread}
-                </span>
-              )}
-            </div>
-
-            <div className="last-message">
-              {chat.lastMessage}
-            </div>
-
-            <div className="timestamp">
-              {chat.timestamp}
-            </div>
-
-            <button
-              className="delete-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteChat(chat.chatId);
-              }}
-            >
-              DELETE
-            </button>
-          </div>
-        ))}
-
-      </div>
-    </div>
-  );
-}
->>>>>>> 71c2677 (Update)
+</div>
+)}

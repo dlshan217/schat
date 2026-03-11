@@ -1,190 +1,273 @@
 import { useEffect, useState } from "react";
 import { ref, get, update } from "firebase/database";
-import { auth } from "./firebase";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
 
 export default function Profile({ onBack }) {
+
   const uid = auth.currentUser.uid;
-<<<<<<< HEAD
-  const [profile, setProfile] = useState(null);
-  const [photo, setPhoto] = useState("");
-=======
 
-  const [profile, setProfile] = useState(null);
-  const [photo, setPhoto] = useState("");
-  const [saving, setSaving] = useState(false);
->>>>>>> 71c2677 (Update)
+  const [profile,setProfile] = useState(null);
+  const [photo,setPhoto] = useState("");
 
-  useEffect(() => {
-    const loadProfile = async () => {
-      const snap = await get(ref(db, `users/${uid}`));
-<<<<<<< HEAD
-      setProfile(snap.val());
-      setPhoto(snap.val()?.photo || "");
-    };
-=======
+  const [status,setStatus] = useState("");
+  const [statusExpire,setStatusExpire] = useState("");
+
+  const [theme,setTheme] = useState("yellow");
+
+
+  /* LOAD PROFILE */
+
+  useEffect(()=>{
+
+    const load = async()=>{
+
+      const snap = await get(ref(db,`users/${uid}`));
+
+      if(!snap.exists()) return;
+
       const data = snap.val();
+
       setProfile(data);
-      setPhoto(data?.photo || "");
+      setPhoto(data.photo || "");
+      setStatus(data.status || "");
+      setStatusExpire(data.statusExpire || "");
+      setTheme(data.theme || "yellow");
+
     };
 
->>>>>>> 71c2677 (Update)
-    loadProfile();
-  }, [uid]);
+    load();
 
-  const saveProfile = async () => {
-<<<<<<< HEAD
-    await update(ref(db, `users/${uid}`), {
-      photo
+  },[uid]);
+
+
+  /* SAVE PROFILE */
+
+  const save = async()=>{
+
+    await update(ref(db,`users/${uid}`),{
+
+      photo,
+      status,
+      statusExpire,
+      theme
+
     });
-    alert("Profile updated");
+
+    alert("PROFILE UPDATED");
+
   };
 
-  if (!profile) return <div>Loading…</div>;
+
+  /* TEMP STATUS */
+
+  const setTemporaryStatus = (minutes)=>{
+
+    const expire = Date.now() + minutes * 60000;
+
+    setStatusExpire(expire);
+
+  };
+
+
+  /* COPY UID */
+
+  const copyUID = ()=>{
+
+    navigator.clipboard.writeText(uid);
+    alert("UID COPIED");
+
+  };
+
+
+  if(!profile){
+
+    return <div className="loading">Loading...</div>;
+
+  }
+
 
   return (
-    <div className="profile">
-      <h2>My Profile</h2>
 
-      <p><b>Username:</b> {profile.username}</p>
-      <p><b>Email:</b> {profile.email}</p>
+  <div className="page">
 
-      <input
-        placeholder="Profile image URL"
-        value={photo}
-        onChange={e => setPhoto(e.target.value)}
-      />
 
-      {photo && (
-        <img
+    {/* TOPBAR */}
+
+    <div className="topbar">
+
+      <button
+      className="btn"
+      onClick={onBack}
+      >
+        BACK
+      </button>
+
+      <div>PROFILE</div>
+
+    </div>
+
+
+    {/* MAIN */}
+
+    <div className="main">
+
+
+      <div className="card bg-white" style={{maxWidth:420}}>
+
+
+        {/* AVATAR */}
+
+        {photo ? (
+
+          <img
           src={photo}
           alt="profile"
           style={{
-            width: 100,
-            height: 100,
-            borderRadius: "50%",
-            marginTop: 10
+            width:120,
+            height:120,
+            border:"4px solid black",
+            borderRadius:"50%",
+            marginBottom:20
           }}
+          />
+
+        ) : (
+
+          <div
+          style={{
+            width:120,
+            height:120,
+            border:"4px solid black",
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center",
+            marginBottom:20,
+            fontWeight:700
+          }}
+          >
+            NO IMAGE
+          </div>
+
+        )}
+
+
+        {/* BASIC INFO */}
+
+        <p><b>USERNAME:</b> {profile.username}</p>
+        <p><b>EMAIL:</b> {profile.email}</p>
+
+
+        {/* STATUS */}
+
+        <input
+        className="input"
+        placeholder="STATUS (optional)"
+        value={status}
+        onChange={e=>setStatus(e.target.value)}
         />
-      )}
-
-      <br /><br />
-
-      <button onClick={saveProfile}>Save</button>
-      <button onClick={onBack}>Back</button>
-      <br /><br />
-      <button
-  style={{ marginTop: 20, opacity: 0.6 }}
-  onClick={() => {
-    auth.signOut();
-    window.location.reload();
-  }}
->
-  Logout
-</button>
 
 
-    </div>
-    
-  );
-}
-=======
-    setSaving(true);
-
-    await update(ref(db, `users/${uid}`), {
-      photo
-    });
-
-    setSaving(false);
-  };
-
-  if (!profile) {
-    return (
-      <div className="app">
-        <div className="header">
-          <span>PROFILE</span>
-        </div>
-        <div className="profile-body">LOADING...</div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="app">
-
-      <div className="header">
-        <span>PROFILE</span>
-        <button onClick={onBack}>BACK</button>
-      </div>
-
-      <div className="profile-body">
-
-        <div className="profile-card">
-
-          <div className="profile-info">
-            <div className="profile-field">
-              <label>USERNAME</label>
-              <div className="profile-value">
-                {profile.username}
-              </div>
-            </div>
-
-            <div className="profile-field">
-              <label>EMAIL</label>
-              <div className="profile-value">
-                {profile.email}
-              </div>
-            </div>
-          </div>
-
-          <div className="photo-section">
-            <label>PROFILE IMAGE URL</label>
-
-            <input
-              value={photo}
-              onChange={e => setPhoto(e.target.value)}
-              placeholder="Paste image URL"
-            />
-
-            {photo && (
-              <div className="image-preview">
-                <img src={photo} alt="profile preview" />
-              </div>
-            )}
-          </div>
-
-          <div className="profile-actions">
-            <button
-              className="primary-btn"
-              onClick={saveProfile}
-              disabled={saving}
-            >
-              {saving ? "SAVING..." : "SAVE"}
-            </button>
-
-            <button
-              className="secondary-btn"
-              onClick={onBack}
-            >
-              BACK
-            </button>
-          </div>
+        <div style={{display:"flex",gap:10,marginTop:10}}>
 
           <button
-            className="logout-btn"
-            onClick={() => {
-              auth.signOut();
-              window.location.reload();
-            }}
+          className="btn btn-yellow"
+          onClick={()=>setTemporaryStatus(30)}
+          >
+            30M
+          </button>
+
+          <button
+          className="btn btn-yellow"
+          onClick={()=>setTemporaryStatus(60)}
+          >
+            1H
+          </button>
+
+        </div>
+
+
+        {/* PROFILE IMAGE */}
+
+        <input
+        className="input"
+        placeholder="PROFILE IMAGE URL"
+        value={photo}
+        onChange={e=>setPhoto(e.target.value)}
+        style={{marginTop:20}}
+        />
+
+
+        {/* THEME COLOR */}
+
+        <div style={{marginTop:20}}>
+
+          <b>CHAT COLOR</b>
+
+          <div style={{display:"flex",gap:10,marginTop:10}}>
+
+            <button
+            className="btn btn-yellow"
+            onClick={()=>setTheme("yellow")}
+            >
+              YELLOW
+            </button>
+
+            <button
+            className="btn btn-pink"
+            onClick={()=>setTheme("pink")}
+            >
+              PINK
+            </button>
+
+            <button
+            className="btn btn-green"
+            onClick={()=>setTheme("green")}
+            >
+              GREEN
+            </button>
+
+          </div>
+
+        </div>
+
+
+        {/* ACTIONS */}
+
+        <div style={{display:"flex",gap:10,marginTop:24}}>
+
+          <button
+          className="btn btn-green"
+          onClick={save}
+          >
+            SAVE
+          </button>
+
+          <button
+          className="btn"
+          onClick={copyUID}
+          >
+            COPY UID
+          </button>
+
+          <button
+          className="btn btn-pink"
+          onClick={()=>{
+            auth.signOut();
+            window.location.reload();
+          }}
           >
             LOGOUT
           </button>
 
         </div>
 
+
       </div>
 
     </div>
+
+  </div>
+
   );
+
 }
->>>>>>> 71c2677 (Update)

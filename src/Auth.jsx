@@ -24,7 +24,6 @@ export default function Auth({ onAuth }) {
           throw new Error("Fill all fields");
         }
 
-        // Check username uniqueness
         const nameRef = ref(db, `usernames/${username}`);
         const snap = await get(nameRef);
         if (snap.exists()) {
@@ -40,11 +39,12 @@ export default function Auth({ onAuth }) {
         const uid = res.user.uid;
 
         await set(ref(db, `usernames/${username}`), uid);
+
         await set(ref(db, `users/${uid}`), {
           username,
           email,
           createdAt: Date.now(),
-          photo: "" // profile image later
+          photo: ""
         });
 
         onAuth(res.user);
@@ -58,6 +58,7 @@ export default function Auth({ onAuth }) {
           email,
           password
         );
+
         onAuth(res.user);
       }
     } catch (e) {
@@ -68,41 +69,77 @@ export default function Auth({ onAuth }) {
   };
 
   return (
-    <div className="auth">
-      <h2>{mode === "signup" ? "Sign Up" : "Login"}</h2>
+<div className="auth-page">
 
-      {mode === "signup" && (
-        <input
-          placeholder="Username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-      )}
+  <div className="auth-hero">
 
+    <h1>SCHAT</h1>
+    <p>Meet strangers instantly.</p>
+
+  </div>
+
+
+  <div className="auth-card">
+
+    <h2>
+      {mode === "signup" ? "CREATE ACCOUNT" : "LOGIN"}
+    </h2>
+
+    {mode === "signup" && (
       <input
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
+        className="auth-input"
+        placeholder="USERNAME"
+        value={username}
+        onChange={e => setUsername(e.target.value)}
       />
+    )}
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
+    <input
+      className="auth-input"
+      placeholder="EMAIL"
+      value={email}
+      onChange={e => setEmail(e.target.value)}
+    />
 
-      <button onClick={submit} disabled={loading}>
-        {loading ? "Please wait…" : mode === "signup" ? "Create account" : "Login"}
-      </button>
+    <input
+      className="auth-input"
+      type="password"
+      placeholder="PASSWORD"
+      value={password}
+      onChange={e => setPassword(e.target.value)}
+    />
 
-      <p onClick={() => setMode(mode === "signup" ? "login" : "signup")}>
-        {mode === "signup"
-          ? "Already have an account?"
-          : "Create new account"}
-      </p>
+    <button
+      className="auth-submit"
+      onClick={submit}
+      disabled={loading}
+    >
+      {loading
+        ? "PLEASE WAIT..."
+        : mode === "signup"
+        ? "CREATE ACCOUNT"
+        : "LOGIN"}
+    </button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div
+      className="auth-switch"
+      onClick={() =>
+        setMode(mode === "signup" ? "login" : "signup")
+      }
+    >
+      {mode === "signup"
+        ? "Already have an account?"
+        : "Create new account"}
     </div>
-  );
+
+    {error && (
+      <div className="auth-error">
+        {error}
+      </div>
+    )}
+
+  </div>
+
+</div>
+)
 }
