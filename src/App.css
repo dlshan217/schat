@@ -187,7 +187,9 @@ font-size:40px;
 /* ============== scroll ================ */
 .chat-area{
 scroll-behavior:smooth;
-=======
+
+
+  
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600&display=swap');
 /* ================= RESET ================= */
 *{
