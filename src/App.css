@@ -376,7 +376,4 @@ justify-content:center;
 font-family:"Anton";
 font-size:40px;
 }
-/* ============== scroll ================ */
-.chat-area{
-scroll-behavior:smooth;
-}
+
