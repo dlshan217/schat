@@ -1,27 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600&display=swap');
-
 /* ================= RESET ================= */
-
 *{
 box-sizing:border-box;
 margin:0;
 padding:0;
 }
-
 body{
 font-family:"Space Grotesk",sans-serif;
 background:#f4f4f4;
 color:#000;
 }
-
 /* ================= PAGE LAYOUT ================= */
-
 .page{
 min-height:100vh;
 display:flex;
 flex-direction:column;
 }
-
 .main{
 flex:1;
 display:flex;
@@ -31,9 +25,7 @@ justify-content:center;
 padding:40px 20px;
 gap:30px;
 }
-
 /* ================= TOP BAR ================= */
-
 .topbar{
 display:flex;
 justify-content:space-between;
@@ -43,9 +35,7 @@ border-bottom:4px solid black;
 background:white;
 font-weight:600;
 }
-
 /* ================= GRID ================= */
-
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -53,7 +43,6 @@ gap:24px;
 width:100%;
 max-width:900px;
 }
-
 .list-item{
 display:flex;
 flex-direction:column;
@@ -61,9 +50,7 @@ margin-bottom:14px;
 max-width:600px;
 width:100%;
 }
-
 /* ================= CARD ================= */
-
 .card{
 padding:28px;
 border:4px solid black;
@@ -72,22 +59,17 @@ box-shadow:8px 8px 0 black;
 transition:0.15s;
 cursor:pointer;
 }
-
 .card:hover{
 transform:translate(-4px,-4px);
 box-shadow:12px 12px 0 black;
 }
-
 /* ================= COLORS ================= */
-
 .bg-white{background:#fff;}
 .bg-yellow{background:#FFE500;}
 .bg-pink{background:#FF4F8B;}
 .bg-blue{background:#3ABEFF;}
 .bg-green{background:#5DFF7E;}
-
 /* ================= BUTTON ================= */
-
 .btn{
 border:4px solid black;
 padding:14px 26px;
@@ -97,27 +79,21 @@ cursor:pointer;
 box-shadow:6px 6px 0 black;
 background:white;
 }
-
 .btn:hover{
 transform:translate(-3px,-3px);
 box-shadow:9px 9px 0 black;
 }
-
 .btn-yellow{background:#FFE500;}
 .btn-pink{background:#FF4F8B;}
 .btn-green{background:#5DFF7E;}
-
 /* ================= INPUT ================= */
-
 .input{
 padding:14px;
 border:4px solid black;
 font-family:"Space Grotesk";
 width:100%;
 }
-
 /* ================= CHAT ================= */
-
 .chat-area{
 flex:1;
 overflow-y:auto;
@@ -125,9 +101,7 @@ padding:20px;
 display:flex;
 flex-direction:column;
 gap:12px;
-scroll-behavior:smooth;
 }
-
 .msg{
 max-width:70%;
 padding:12px 18px;
@@ -135,34 +109,27 @@ border:3px solid black;
 background:white;
 font-weight:500;
 }
-
 .msg.me{
 align-self:flex-end;
 background:#FFE500;
 }
-
 .input-row{
 display:flex;
 gap:12px;
 padding:16px;
 border-top:4px solid black;
 }
-
 /* ================= TYPING INDICATOR ================= */
-
 .typing{
 opacity:0.7;
 font-style:italic;
 animation:blink 1s infinite;
 }
-
 @keyframes blink{
 0%,100%{opacity:0.7}
 50%{opacity:0.3}
 }
-
 /* ================= MODAL POPUP ================= */
-
 .modal-overlay{
 position:fixed;
 top:0;
@@ -175,7 +142,6 @@ align-items:center;
 justify-content:center;
 z-index:999;
 }
-
 .modal{
 background:white;
 border:4px solid black;
@@ -184,16 +150,13 @@ width:320px;
 box-shadow:8px 8px 0 black;
 text-align:center;
 }
-
 .modal-buttons{
 display:flex;
 gap:10px;
 margin-top:20px;
 justify-content:center;
 }
-
 /* ================= WATERMARK ================= */
-
 .watermark{
 text-align:center;
 margin-top:20px;
@@ -203,20 +166,16 @@ letter-spacing:2px;
 opacity:0.6;
 user-select:none;
 }
-
 #wm{
 display:inline-block;
 animation:floatLoop 3s ease-in-out infinite;
 }
-
 @keyframes floatLoop{
 0%{transform:translateY(0) scale(1);}
 50%{transform:translateY(-3px) scale(1.05);}
 100%{transform:translateY(0) scale(1);}
 }
-
 /* ================= LOADING ================= */
-
 .loading{
 height:100vh;
 display:flex;
@@ -225,3 +184,196 @@ justify-content:center;
 font-family:"Anton";
 font-size:40px;
 }
+/* ============== scroll ================ */
+.chat-area{
+scroll-behavior:smooth;
+=======
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600&display=swap');
+/* ================= RESET ================= */
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+body{
+font-family:"Space Grotesk",sans-serif;
+background:#f4f4f4;
+color:#000;
+}
+/* ================= PAGE LAYOUT ================= */
+.page{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:40px 20px;
+gap:30px;
+}
+/* ================= TOP BAR ================= */
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:8px 25px;
+border-bottom:4px solid black;
+background:white;
+font-weight:600;
+}
+/* ================= GRID ================= */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:24px;
+width:100%;
+max-width:900px;
+}
+.list-item{
+display:flex;
+flex-direction:column;
+margin-bottom:14px;
+max-width:600px;
+width:100%;
+}
+/* ================= CARD ================= */
+.card{
+padding:28px;
+border:4px solid black;
+background:white;
+box-shadow:8px 8px 0 black;
+transition:0.15s;
+cursor:pointer;
+}
+.card:hover{
+transform:translate(-4px,-4px);
+box-shadow:12px 12px 0 black;
+}
+/* ================= COLORS ================= */
+.bg-white{background:#fff;}
+.bg-yellow{background:#FFE500;}
+.bg-pink{background:#FF4F8B;}
+.bg-blue{background:#3ABEFF;}
+.bg-green{background:#5DFF7E;}
+/* ================= BUTTON ================= */
+.btn{
+border:4px solid black;
+padding:14px 26px;
+font-family:"Anton";
+font-size:16px;
+cursor:pointer;
+box-shadow:6px 6px 0 black;
+background:white;
+}
+.btn:hover{
+transform:translate(-3px,-3px);
+box-shadow:9px 9px 0 black;
+}
+.btn-yellow{background:#FFE500;}
+.btn-pink{background:#FF4F8B;}
+.btn-green{background:#5DFF7E;}
+/* ================= INPUT ================= */
+.input{
+padding:14px;
+border:4px solid black;
+font-family:"Space Grotesk";
+width:100%;
+}
+/* ================= CHAT ================= */
+.chat-area{
+flex:1;
+overflow-y:auto;
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+.msg{
+max-width:70%;
+padding:12px 18px;
+border:3px solid black;
+background:white;
+font-weight:500;
+}
+.msg.me{
+align-self:flex-end;
+background:#FFE500;
+}
+.input-row{
+display:flex;
+gap:12px;
+padding:16px;
+border-top:4px solid black;
+}
+/* ================= TYPING INDICATOR ================= */
+.typing{
+opacity:0.7;
+font-style:italic;
+animation:blink 1s infinite;
+}
+@keyframes blink{
+0%,100%{opacity:0.7}
+50%{opacity:0.3}
+}
+/* ================= MODAL POPUP ================= */
+.modal-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:999;
+}
+.modal{
+background:white;
+border:4px solid black;
+padding:35px;
+width:320px;
+box-shadow:8px 8px 0 black;
+text-align:center;
+}
+.modal-buttons{
+display:flex;
+gap:10px;
+margin-top:20px;
+justify-content:center;
+}
+/* ================= WATERMARK ================= */
+.watermark{
+text-align:center;
+margin-top:20px;
+font-family:"Anton",sans-serif;
+font-size:14px;
+letter-spacing:2px;
+opacity:0.6;
+user-select:none;
+}
+#wm{
+display:inline-block;
+animation:floatLoop 3s ease-in-out infinite;
+}
+@keyframes floatLoop{
+0%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-3px) scale(1.05);}
+100%{transform:translateY(0) scale(1);}
+}
+/* ================= LOADING ================= */
+.loading{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:"Anton";
+font-size:40px;
+}
+/* ============== scroll ================ */
+.chat-area{
+scroll-behavior:smooth;
