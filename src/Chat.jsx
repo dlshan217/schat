@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useEffect, useState, useRef } from "react";
 import {
   ref,
@@ -996,5 +995,4 @@ KEEP HUNTING
 
 );
 
->>>>>>> aae81250010c1df3b72ecc2abcac096d1026573e
 }
