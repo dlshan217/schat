@@ -7,7 +7,7 @@ import Chat from "./Chat";
 import Inbox from "./Inbox";
 import PrivateChat from "./PrivateChat";
 import Profile from "./Profile";
-import About from "./about";
+import About from "./About";
 
 export default function App() {
 
