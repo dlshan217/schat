@@ -53,7 +53,7 @@ export default function App() {
 
   /* ================= ROUTING ================= */
 
-  if(page === "about"){
+  if(page === "About"){
   return <About onBack={()=>setPage("home")} />;
 }
 
@@ -205,7 +205,7 @@ export default function App() {
 
         <div 
   className="card bg-pink"
-  onClick={()=>setPage("about")}
+  onClick={()=>setPage("About")}
 >
 
   <h2>HOW IT WORKS</h2>
