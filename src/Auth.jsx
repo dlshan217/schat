@@ -133,7 +133,7 @@ export default function Auth({ onAuth }) {
 
         <h1 style={{
           fontFamily: "Anton",
-          fontSize: "80px",
+          fontSize: "110px",
           marginBottom: "20px"
         }}>
           SCHAT.
