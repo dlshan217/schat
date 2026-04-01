@@ -105,7 +105,7 @@ export default function Auth({ onAuth }) {
 
   return isMobile ? (
 
-    // 📱 MOBILE
+    // MOBILE
     <div style={{ height: "100vh", width: "100vw", position: "relative" }}>
 
       {/* BACKGROUND */}
@@ -133,7 +133,7 @@ export default function Auth({ onAuth }) {
 
         <h1 style={{
           fontFamily: "Anton",
-          fontSize: "50px",
+          fontSize: "80px",
           marginBottom: "20px"
         }}>
           SCHAT.
@@ -224,7 +224,7 @@ export default function Auth({ onAuth }) {
 
   ) : (
 
-    // 💻 DESKTOP (UNCHANGED)
+    // DESKTOP
     <div style={{ display: "flex", height: "100vh", width: "100vw" }}>
 
       <div
