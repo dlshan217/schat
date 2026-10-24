@@ -7,6 +7,7 @@ export default function PrivateChat({ user, chatId, onBack }) {
 const [messages,setMessages] = useState([]);
 const [text,setText] = useState("");
 const [otherUser,setOtherUser] = useState(null);
+const [chatTheme,setChatTheme] = useState("yellow");
 
 const [typing,setTyping] = useState(false);
 const [otherTyping,setOtherTyping] = useState(false);
@@ -53,6 +54,12 @@ setOtherUser(userSnap.val());
 loadProfile();
 
 },[chatId,user.uid]);
+
+useEffect(()=>{
+get(ref(db,`users/${user.uid}/theme`)).then(snap=>{
+if(snap.exists() && ["yellow","pink","green"].includes(snap.val())) setChatTheme(snap.val());
+}).catch(()=>{});
+},[user.uid]);
 
 
 
@@ -105,11 +112,13 @@ setOtherTyping(other ? data[other] : false);
 
 const send = ()=>{
 
-if(!text.trim()) return;
+const message = text.trim();
+if(!message) return;
+if(message.length > 2000) return;
 
 push(ref(db,`privateChats/${chatId}/messages`),{
 
-text,
+text: message,
 sender:user.uid,
 ts:Date.now()
 
@@ -146,7 +155,7 @@ alt=""
 style={{
 width:30,
 height:30,
-border:"3px solid black",
+border:"2px solid rgba(255,255,255,.9)",
 borderRadius:"50%",
 marginRight:8
 }}
@@ -170,7 +179,7 @@ marginRight:8
 
 <div
 key={i}
-className={"msg "+(m.sender===user.uid?"me":"")}
+className={`msg ${m.sender===user.uid ? `me theme-${chatTheme}` : ""}`}
 >
 
 {m.text}
@@ -201,6 +210,7 @@ className={"msg "+(m.sender===user.uid?"me":"")}
 <input
 className="input"
 value={text}
+maxLength={2000}
 placeholder="TYPE MESSAGE"
 onChange={e=>{
 setText(e.target.value);

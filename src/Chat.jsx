@@ -30,6 +30,13 @@ const [otherTyping,setOtherTyping] = useState(false);
 const typingTimeout = useRef(null);
 
 const [chatStart,setChatStart] = useState(0);
+const [chatTheme,setChatTheme] = useState("yellow");
+
+useEffect(()=>{
+get(ref(db,`users/${uid}/theme`)).then(snap=>{
+if(snap.exists() && ["yellow","pink","green"].includes(snap.val())) setChatTheme(snap.val());
+}).catch(()=>{});
+},[uid]);
 
 
 
@@ -277,7 +284,12 @@ await remove(roomRef);
 
 const sendMessage = ()=>{
 
-if(!text.trim()||!roomId) return;
+const message = text.trim();
+if(!message||!roomId) return;
+if(message.length > 2000){
+alert("Messages must be 2,000 characters or fewer");
+return;
+}
 
 const banned = ["m","f","male","female","boy","girl"];
 const lower = text.toLowerCase();
@@ -292,7 +304,7 @@ return;
 }
 
 push(ref(db,`rooms/${roomId}/messages`),{
-text,
+text: message,
 sender:uid,
 ts:Date.now()
 });
@@ -346,7 +358,7 @@ return(
 <div>SCHAT</div>
 <div>{onlineCount} ONLINE</div>
 
-<button className="btn" onClick={onExit}>
+<button className="btn chat-exit" onClick={onExit}>
 EXIT
 </button>
 
@@ -360,8 +372,10 @@ EXIT
 
 {!searching?(
 
-<button className="btn btn-yellow" onClick={findStranger}>
-START HUNTING
+<button className="btn find-stranger-btn" onClick={findStranger}>
+<span className="find-stranger-icon" aria-hidden="true">✳</span>
+<span>Find a stranger</span>
+<span className="find-stranger-arrow" aria-hidden="true">↗</span>
 </button>
 
 ):( 
@@ -388,7 +402,7 @@ CANCEL
 
 {messages.map((m,i)=>(
 
-<div key={i} className={"msg "+(m.sender===uid?"me":"")}>
+<div key={i} className={`msg ${m.sender===uid ? `me theme-${chatTheme}` : ""}`}>
 {m.text}
 </div>
 
@@ -425,6 +439,7 @@ REVEAL ID
 <input
 className="input"
 value={text}
+maxLength={2000}
 placeholder="TYPE MESSAGE"
 onChange={(e)=>{
 setText(e.target.value);
