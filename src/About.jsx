@@ -29,8 +29,10 @@ BACK
 <div className="main">
 
 <h1 className="hero-title">
-HOW IT WORKS
+The lowdown<span className="brand-period">.</span>
 </h1>
+
+<p className="about-intro">A tiny social experiment for people who miss talking to people.</p>
 
 
 <div className="grid">
@@ -51,7 +53,7 @@ HOW IT WORKS
 </div>
 
 <p>
-hit "start hunting" /( Warning: You might end up talking to yourself if no one else is online )
+Tap Find a human and we’ll look for someone else who’s up for a chat.
 </p>
 
 </div>
@@ -74,7 +76,7 @@ hit "start hunting" /( Warning: You might end up talking to yourself if no one e
 </div>
 
 <p>
-You get paired with a random person.( lets hope)
+You’ll meet someone new. No bios to perform, no feed to keep up with.
 </p>
 
 </div>
@@ -114,7 +116,7 @@ Start talking instantly.
 </div>
 
 <p>
-Both users can reveal identities if they agree. dont be wierd
+If you both want to stay in touch, you can move the conversation to your inbox.
 </p>
 
 </div>
@@ -125,8 +127,8 @@ Both users can reveal identities if they agree. dont be wierd
 </div>
 
 </div>
-<p class="watermark">
-  <span id="wm">dlshan.</span>
+<p className="watermark">
+  <span>✳</span> good vibes, basic manners
 </p>
 
 

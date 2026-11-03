@@ -2,11 +2,22 @@ import { useEffect, useState } from "react";
 import { ref, onValue, get } from "firebase/database";
 import { db } from "./firebase";
 
-export default function Inbox({ user, openChat, onBack }) {
+export default function Inbox({ user, openChat }) {
 
   const [chats,setChats] = useState([]);
   const [search,setSearch] = useState("");
   const [view,setView] = useState("list"); // list or grid
+  const [username,setUsername] = useState("");
+
+  useEffect(() => {
+    let current = true;
+    get(ref(db, `users/${user.uid}`)).then(snapshot => {
+      if (current) setUsername(snapshot.val()?.username || "Your account");
+    }).catch(() => {
+      if (current) setUsername(user.displayName || user.email || "Your account");
+    });
+    return () => { current = false; };
+  }, [user.uid, user.displayName, user.email]);
 
   useEffect(()=>{
 
@@ -67,12 +78,7 @@ export default function Inbox({ user, openChat, onBack }) {
 
   <div className="topbar">
 
-    <button
-      className="btn"
-      onClick={onBack}
-    >
-      BACK
-    </button>
+    <div className="inbox-user-name">{username || user.displayName || "Your account"}</div>
 
     <div>INBOX</div>
 
